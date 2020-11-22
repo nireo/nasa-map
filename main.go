@@ -4,6 +4,9 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"time"
+
+	"github.com/nireo/nature-tracker/data"
 )
 
 // Why is there a server?
@@ -16,6 +19,10 @@ func GetNatureData(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	http.HandleFunc("/api/data", GetNatureData)
+	// initially load the data
+	if err := data.LoadData(); err != nil {
+		log.Fatal("Could not execute initial data load")
+	}
 
 	// create a go routine which handles hosting the web server
 	go func() {
@@ -23,5 +30,13 @@ func main() {
 	}()
 
 	log.Println("Server running on PORT=8080")
+
+	// periodically load the data every 30 minutes
+	for range time.NewTicker(30 * time.Minute).C {
+		if err := data.LoadData(); err != nil {
+			log.Fatal("Could not load data")
+		}
+	}
+
 	select {}
 }
