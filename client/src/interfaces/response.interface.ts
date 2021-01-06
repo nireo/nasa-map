@@ -3,13 +3,13 @@ export interface Event {
     title: string;
     link: string;
     description: string;
-    Categories: Category[];
-    Sources: Source[];
-    Geometries: Geometry[];
+    categories: Category[];
+    sources: Source[];
+    geometries: Geometry[];
 }
 
 export interface Category {
-    id: string;
+    id: number;
     title: string;
 }
 
@@ -21,12 +21,12 @@ export interface Source {
 export interface Geometry {
     date: string;
     type: string;
-    coordinates: string[];
+    coordinates: number[];
 }
 
 export interface DataResponse {
     title: string;
     description: string;
     link: string;
-    Events: Event[];
+    events: Event[];
 }
