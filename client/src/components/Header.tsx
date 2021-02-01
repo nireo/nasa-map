@@ -18,7 +18,7 @@ export const PageHeader: React.FC = () => {
                 />
                 <Header
                     as="h2"
-                    content="Following some of the horrors of nature."
+                    content="What is truly happening around the world."
                     style={{
                         fontSize: "1.7em",
                         fontWeight: "normal",
